@@ -1,8 +1,10 @@
 import { useState, useContext, useEffect } from "react"
 import { Button } from "../../components/button/Button"
 import { Layout } from "../../components/layout/Layout"
+import { Title } from "../../components/title/title"
 import { useNavigate } from "react-router-dom"
 import { routes } from "../../routes"
+import { RadioCard, SizeActionWrapper, SizeContentWrapper } from "./Sizes.style"
 import OrderContext from "../../contexts/OrderContext"
 
 export default function Sizes() {
@@ -82,33 +84,33 @@ export default function Sizes() {
 
   return (
     <Layout>
-      <h1 tabIndex={0}>Escolha o tamanho da sua pizza.</h1>
-      <section>
+      <Title tabIndex={0}>Escolha o tamanho da sua pizza</Title>
+      <SizeContentWrapper>
         {sizeOptions.map(({ id, size, slices, flavours, text }) => (
-          <div key={id}>
+          <RadioCard key={id}>
             <input
-            type='radio' 
-            id={id} 
-            name='sizes' 
-            onChange={handleChange}
-            value={id}
+              type="radio"
+              id={id}
+              name="sizes"
+              onChange={handleChange}
+              value={id}
+              checked={sizeId === id}
             />
             <label htmlFor={id}>
               {text} - {flavours} sabores
               <span>
                 Pizza com {slices} pedaços e {size}cm
-              </span>           
+              </span>
             </label>
-          </div>
+          </RadioCard>
         ))}
-      </section>
-      <div>
+      </SizeContentWrapper>
+      <SizeActionWrapper>
         <Button inverse="inverse" onClick={handleBack}>
-        Voltar
+          Voltar
         </Button>
         <Button onClick={handleNext}>Escolha o sabor</Button>
-      </div>
+      </SizeActionWrapper>
     </Layout>
   )
 }
-
