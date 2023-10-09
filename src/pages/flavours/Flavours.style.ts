@@ -25,7 +25,6 @@ export const FlavourCard = styled.div`
   &:hover {
     border-color: ${colors.text.main};
   }
-
   ${(props) =>
     props.selected &&
     `

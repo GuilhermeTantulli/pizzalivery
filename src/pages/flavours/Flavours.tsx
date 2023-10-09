@@ -1,16 +1,17 @@
-import { useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Button } from "../../components/button/Button"
-import { Layout } from "../../components/layout/Layout"
-import { routes } from "../../routes"
-import OrderContext from "../../contexts/OrderContext"
+import { Layout } from "../../components/layout/Layout";
+import { Button } from "../../components/button/Button";
+import { Title } from "../../components/title/Title";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes";
+import { useContext, useEffect, useState } from "react";
+import OrderContext from "../../contexts/OrderContext";
 
 import Mussarela from "../../assets/pizza-flavours/mucarela.png"
 import ChickenWithCheese from "../../assets/pizza-flavours/frango-catupiry.png"
 import Margherita from "../../assets/pizza-flavours/margherita.png"
 import Lusa from "../../assets/pizza-flavours/portuguesa.png"
 
-import { convertToCurrency } from "../../helpers/convertToCurrency"
+import { convertToCurrency } from "../../helpers/convertToCurrency";
 
 import {
   FlavourActionWrapper,
@@ -21,12 +22,11 @@ import {
   FlavourCardTitle,
   FlavourContentWrapper,
 } from "./Flavours.style"
-import { Title } from "../../components/title/title"
 
 export default function Flavours() {
   const navigate = useNavigate()
-  const { pizzaSize, pizzaFlavour, setPizzaFlavour } = useContext(OrderContext)
-  const [flavourId, setflavourId] = useState("")
+  const { pizzaSize, pizzaFlavour, setPizzaFlavour} = useContext(OrderContext)
+  const [ flavourId, setFlavourId ] = useState("")
 
   const flavoursOptions = [
     {
@@ -79,12 +79,12 @@ export default function Flavours() {
     },
   ]
 
-  const getPizzaFlavour = (id: string) => {
+  const getPizzaFlavour = (id:string) => {
     return flavoursOptions.filter((flavour) => flavour.id === id)
   }
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setflavourId(event.target.id)
+    setFlavourId(event.target.id)
   }
 
   const handleBack = () => {
@@ -99,8 +99,8 @@ export default function Flavours() {
 
   useEffect(() => {
     if (!pizzaFlavour) return
-
-    setflavourId(pizzaFlavour[0].id)
+    
+    setFlavourId(pizzaFlavour[0].id)
   }, [])
 
   return (
@@ -109,7 +109,7 @@ export default function Flavours() {
       <FlavourContentWrapper>
         {flavoursOptions.map(({ id, image, name, description, price }) => (
           <FlavourCard key={id} selected={id === flavourId ? true : false}>
-            <FlavourCardImage src={image} alt={name} />
+            <FlavourCardImage  src={image} alt={name} width="200px" />
             <FlavourCardTitle>{name}</FlavourCardTitle>
             <FlavourCardDescription>{description}</FlavourCardDescription>
             <FlavourCardPrice>
@@ -125,7 +125,7 @@ export default function Flavours() {
         <Button inverse="inverse" onClick={handleBack}>
           Voltar
         </Button>
-        <Button onClick={handleNext}>Escolha o sabor</Button>
+        <Button onClick={handleNext}>Seguir para o resumo</Button>
       </FlavourActionWrapper>
     </Layout>
   )
