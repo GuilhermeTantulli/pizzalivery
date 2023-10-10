@@ -12,10 +12,12 @@
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.27",
+    "components": "^0.1.0",
     "react": "^18.2.0",
     "react-components": "^0.5.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
+    "styled": "^1.0.0",
     "styled-components": "^6.0.8",
     "vite-plugin-svgr": "^3.2.0"
   },
