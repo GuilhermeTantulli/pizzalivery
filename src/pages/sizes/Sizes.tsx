@@ -1,9 +1,9 @@
-import { useState, useContext, useEffect } from "react"
-import { Button } from "../../components/button/Button"
-import { Layout } from "../../components/layout/Layout"
-import { Title } from "../../components/title/title"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { routes } from "../../routes"
+import { Button } from "../../components/button/Button"
+import { Layout } from "../../components/layout/Layout"
+import { Title } from "../../components/title/Title"
 import { RadioCard, SizeActionWrapper, SizeContentWrapper } from "./Sizes.style"
 import OrderContext from "../../contexts/OrderContext"
 
@@ -11,7 +11,7 @@ export default function Sizes() {
   const navigate = useNavigate()
   const { pizzaSize, setPizzaSize } = useContext(OrderContext)
 
-  const [sizeId, setSizeId] = useState('')
+  const [sizeId, setSizeId] = useState("")
   const [pizzaSizeOptions, setPizzaSizeOptions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -29,7 +29,7 @@ export default function Sizes() {
   }
 
   const getPizzaSize = (sizeId: string) => {
-    return sizeOptions.filter((option) => option.id === sizeId)
+    return pizzaSizeOptions.filter((option) => option.id === sizeId)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,19 +42,23 @@ export default function Sizes() {
 
   const handleNext = () => {
     const selectedSize = getPizzaSize(sizeId)
-    const selectedFlavours = selectedSize[0].flavours;
+    const selectedFlavour = selectedSize[0].flavours
     setPizzaSize(selectedSize)
 
-    if (selectedFlavours == 1) {
-    navigate(routes.pizzaFlavour);
-    } else if (selectedFlavours == 2) {
-    navigate(routes.pizzaDoubleFlavour);
+    if (selectedFlavour == 1) {
+      navigate(routes.pizzaFlavour)
+    } else if(selectedFlavour == 2) {
+      navigate(routes.pizzaDualFlavour)
     }
   }
 
-  useEffect (() => {
-    if(!pizzaSize) return
+  useEffect(() => {
+    if (!pizzaSize) return
     setSizeId(pizzaSize[0].id)
+  }, [])
+  
+  useEffect(() => {
+    getPizzaSizeOptions()
   }, [])
 
   return (
